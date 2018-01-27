@@ -1,4 +1,4 @@
-# SoPra RESTful Service Template
+# SoPra RESTful Service Template FS18
 
 ## Spring Boot
 
