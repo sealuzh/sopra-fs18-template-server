@@ -20,7 +20,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
-apply plugin: 'org.sonarqube'
+//apply plugin: 'org.sonarqube'
 
 uploadArchives.dependsOn bootRepackage
 
@@ -51,12 +51,12 @@ test {
 
 }
 
-sonarqube {
-    properties {
-        property "sonar.projectName", "sopra_group-XX-service"
-        property "sonar.projectKey", "sopra_group-XX-service"
-    }
-}
+//sonarqube {
+//    properties {
+//        property "sonar.projectName", "sopra_group-XX-service"
+//        property "sonar.projectKey", "sopra_group-XX-service"
+//    }
+//}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.11'
