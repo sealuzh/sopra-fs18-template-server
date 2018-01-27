@@ -1,10 +1,10 @@
-package ch.uzh.ifi.seal.soprafs17.service;
+package ch.uzh.ifi.seal.soprafs18.service;
 
-import ch.uzh.ifi.seal.soprafs17.Application;
-import ch.uzh.ifi.seal.soprafs17.constant.UserStatus;
-import ch.uzh.ifi.seal.soprafs17.entity.Game;
-import ch.uzh.ifi.seal.soprafs17.entity.User;
-import ch.uzh.ifi.seal.soprafs17.repository.UserRepository;
+import ch.uzh.ifi.seal.soprafs18.Application;
+import ch.uzh.ifi.seal.soprafs18.constant.UserStatus;
+import ch.uzh.ifi.seal.soprafs18.entity.Game;
+import ch.uzh.ifi.seal.soprafs18.entity.User;
+import ch.uzh.ifi.seal.soprafs18.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

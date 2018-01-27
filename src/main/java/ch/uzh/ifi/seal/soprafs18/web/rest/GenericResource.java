@@ -1,4 +1,4 @@
-package ch.uzh.ifi.seal.soprafs17.web.rest;
+package ch.uzh.ifi.seal.soprafs18.web.rest;
 
 import javax.servlet.http.HttpServletRequest;
 

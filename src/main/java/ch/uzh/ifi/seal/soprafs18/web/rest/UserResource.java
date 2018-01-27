@@ -1,8 +1,8 @@
-package ch.uzh.ifi.seal.soprafs17.web.rest;
+package ch.uzh.ifi.seal.soprafs18.web.rest;
 
-import ch.uzh.ifi.seal.soprafs17.entity.User;
-import ch.uzh.ifi.seal.soprafs17.repository.UserRepository;
-import ch.uzh.ifi.seal.soprafs17.service.UserService;
+import ch.uzh.ifi.seal.soprafs18.entity.User;
+import ch.uzh.ifi.seal.soprafs18.repository.UserRepository;
+import ch.uzh.ifi.seal.soprafs18.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

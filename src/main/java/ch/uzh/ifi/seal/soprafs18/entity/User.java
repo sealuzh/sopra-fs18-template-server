@@ -1,4 +1,4 @@
-package ch.uzh.ifi.seal.soprafs17.entity;
+package ch.uzh.ifi.seal.soprafs18.entity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import ch.uzh.ifi.seal.soprafs17.constant.UserStatus;
+import ch.uzh.ifi.seal.soprafs18.constant.UserStatus;
 
 @Entity
 public class User implements Serializable {

@@ -1,4 +1,4 @@
-package ch.uzh.ifi.seal.soprafs17;
+package ch.uzh.ifi.seal.soprafs18;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

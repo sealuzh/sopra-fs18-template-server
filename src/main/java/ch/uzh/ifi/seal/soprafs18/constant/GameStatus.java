@@ -1,4 +1,4 @@
-package ch.uzh.ifi.seal.soprafs17.constant;
+package ch.uzh.ifi.seal.soprafs18.constant;
 
 public enum GameStatus {
 	PENDING, RUNNING, FINISHED

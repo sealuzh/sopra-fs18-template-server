@@ -1,4 +1,4 @@
-package ch.uzh.ifi.seal.soprafs17.service;
+package ch.uzh.ifi.seal.soprafs18.service;
 
 import org.springframework.stereotype.Service;
 
