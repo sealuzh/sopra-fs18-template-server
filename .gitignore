@@ -46,4 +46,5 @@ target/
 
 # IntelliJ Generated
 .idea
+*.iml
 
