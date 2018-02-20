@@ -9,9 +9,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 
@@ -23,9 +25,9 @@ import static org.junit.Assert.assertNotNull;
  *
  * @see UserService
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
-@Transactional
+@WebAppConfiguration
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes= Application.class)
 public class UserServiceTest {
 
 
@@ -47,10 +49,8 @@ public class UserServiceTest {
 
     @Test
     public void deleteUser() {
-        User user = userService.createUser("testName", "testUsername", "t123", UserStatus.ONLINE, games);
-        userRepository.delete(user.getId());
-        Assert.assertNull(userRepository.findById(user.getId()));
+        User user = userService.createUser("testName2", "testUsername2", "t1232", UserStatus.ONLINE, games);
+        userRepository.delete(user);
+        Assert.assertFalse(userRepository.findById(user.getId()).isPresent());
     }
-
-
 }

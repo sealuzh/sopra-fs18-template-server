@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -49,8 +50,9 @@ public class UserService {
     }
 
     public User login(Long userId) {
-        User user = userRepository.findOne(userId);
-        if (user != null) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
             user.setToken(UUID.randomUUID().toString());
             user.setStatus(UserStatus.ONLINE);
             user = userRepository.save(user);
@@ -60,8 +62,9 @@ public class UserService {
     }
 
     public void logout(Long userId, String userToken) {
-        User user = userRepository.findOne(userId);
-        if (user != null && user.getToken().equals(userToken)) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent() && userOptional.get().getToken().equals(userToken)) {
+            User user = userOptional.get();
             user.setStatus(UserStatus.OFFLINE);
             userRepository.save(user);
         }
@@ -81,10 +84,11 @@ public class UserService {
 
 
     public void deleteUser(Long id) {
-        User user = userRepository.findById(id); //TODO check if user exists
-        userRepository.delete(id);
-        log.debug("Deleted User: {}", user);
+        Optional<User> userOptional = userRepository.findById(id); //TODO check if user exists
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            userRepository.delete(user);
+            log.debug("Deleted User: {}", user);
+        }
     }
-
-
 }
