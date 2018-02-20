@@ -36,6 +36,7 @@ Thumbs.db
 
 # Spring Generated
 .springBeans
+out/
 
 # Eclipse Generated
 .classpath
