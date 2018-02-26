@@ -20,25 +20,31 @@ To build right click the `build.gradle` file and choose `Run Build`
 
 ## Building with Gradle
 
-* Gradle installation: http://gradle.org/installation
-  * Mac OS X with [Homebrew](http://brew.sh/): ``brew install gradle``
+You can use the local Gradle Wrapper to build the application.
+
+Plattform-Prefix:
+
+* MAC OS X:  ``./gradlew``
+* Windows:  ``./gradlew.bat``
+
+More Information about [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) and [Gradle](https://gradle.org/docs/).
 
 ### Build
 
 ```bash
-gradle build
+./gradlew build
 ```
 
 ### Run
 
 ```bash
-gradle bootRun
+./gradlew bootRun
 ```
 
 ### Test
 
 ```bash
-gradle test
+./gradlew test
 ```
 
 ## API Endpoint Testing
