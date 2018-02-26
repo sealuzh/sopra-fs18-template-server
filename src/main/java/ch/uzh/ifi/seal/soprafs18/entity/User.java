@@ -2,6 +2,7 @@ package ch.uzh.ifi.seal.soprafs18.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -94,5 +95,15 @@ public class User implements Serializable {
 
 	public void setStatus(UserStatus status) {
 		this.status = status;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) return true;
+		if (!(o instanceof User)) {
+			return false;
+		}
+		User user = (User) o;
+		return this.getId().equals(user.getId());
 	}
 }

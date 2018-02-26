@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Lucas Pelloni on 26.01.18.
@@ -59,37 +60,32 @@ public class GameService {
     }
 
     public Game getGame(Long gameId) {
-        Game game = gameRepository.findOne(gameId);
-        if (game != null) {
-            return game;
-        }
-        return null;
-
+        Optional<Game> game = gameRepository.findById(gameId);
+        return game.orElse(null);
     }
 
     public void startGame(Long gameId, String userToken) {
-        Game game = gameRepository.findOne(gameId);
+        Optional<Game> game = gameRepository.findById(gameId);
         User owner = userRepository.findByToken(userToken);
 
-        if (owner != null && game != null && game.getOwner().equals(owner.getUsername())) {
+        if (owner != null && game.isPresent() && game.get().getOwner().equals(owner.getUsername())) {
             // TODO: implement the logic for starting the game
         }
     }
 
     public void stopGame(Long gameId, String userToken) {
-        Game game = gameRepository.findOne(gameId);
+        Optional<Game> game = gameRepository.findById(gameId);
         User owner = userRepository.findByToken(userToken);
-        if (owner != null && game != null && game.getOwner().equals(owner.getUsername())) {
+        if (owner != null && game.isPresent() && game.get().getOwner().equals(owner.getUsername())) {
             // TODO: implement the logic for stopping the game
         }
     }
 
     public List<Move> listMoves(Long gameId) {
-        Game game = gameRepository.findOne(gameId);
-        if (game != null) {
-            return game.getMoves();
+        Optional<Game> game = gameRepository.findById(gameId);
+        if (game.isPresent()) {
+            return game.get().getMoves();
         }
-
         return null;
     }
 
@@ -98,31 +94,31 @@ public class GameService {
     }
 
     public Move getMove(Long gameId, Integer moveId) {
-        Game game = gameRepository.findOne(gameId);
-        if (game != null) {
-            return game.getMoves().get(moveId);
+        Optional<Game> game = gameRepository.findById(gameId);
+        if (game.isPresent()) {
+            return game.get().getMoves().get(moveId);
         }
         return null;
     }
 
     public List<User> listPlayers(Long gameId) {
-        Game game = gameRepository.findOne(gameId);
-        if (game != null) {
-            return game.getPlayers();
+        Optional<Game> game = gameRepository.findById(gameId);
+        if (game.isPresent()) {
+            return game.get().getPlayers();
         }
 
         return null;
     }
 
     public String addPlayer(Long gameId, String userToken) {
-        Game game = gameRepository.findOne(gameId);
+        Optional<Game> game = gameRepository.findById(gameId);
         User player = userRepository.findByToken(userToken);
 
-        if (game != null && player != null
-                && game.getPlayers().size() < GameConstants.MAX_PLAYERS) {
-            game.getPlayers().add(player);
-            this.logger.debug("Game: " + game.getName() + " - player added: " + player.getUsername());
-            return CONTEXT + "/" + gameId + "/player/" + (game.getPlayers().size() - 1);
+        if (game.isPresent() && player != null
+                && game.get().getPlayers().size() < GameConstants.MAX_PLAYERS) {
+            game.get().getPlayers().add(player);
+            this.logger.debug("Game: " + game.get().getName() + " - player added: " + player.getUsername());
+            return CONTEXT + "/" + gameId + "/player/" + (game.get().getPlayers().size() - 1);
         } else {
             this.logger.error("Error adding player with token: " + userToken);
         }
@@ -130,7 +126,10 @@ public class GameService {
     }
 
     public User getPlayer(Long gameId, Integer playerId) {
-        Game game = gameRepository.findOne(gameId);
-        return game.getPlayers().get(playerId);
+        Optional<Game> game = gameRepository.findById(gameId);
+        if (game.isPresent()) {
+            return game.get().getPlayers().get(playerId);
+        }
+        return null;
     }
 }

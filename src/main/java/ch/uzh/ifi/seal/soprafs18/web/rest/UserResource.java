@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -42,9 +43,9 @@ public class UserResource extends GenericResource {
 
     @RequestMapping(method = RequestMethod.GET, value = "{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public User getUser(@PathVariable Long userId) {
+    public Optional<User> getUser(@PathVariable Long userId) {
         logger.debug("getUser: " + userId);
-        return userRepo.findOne(userId);
+        return userRepo.findById(userId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "{userId}/login")
