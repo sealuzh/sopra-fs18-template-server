@@ -6,15 +6,19 @@ buildscript {
         mavenCentral()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: "org.sonarqube"
+apply plugin: "jacoco"
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.example'
@@ -27,16 +31,21 @@ repositories {
     maven { url "https://repo.spring.io/milestone" }
 }
 
-//test {
-//    testLogging.showStandardStreams = true
-//}
+jacoco {
+    toolVersion = "0.7.4+"
+}
 
-//sonarqube {
-//    properties {
-//        property "sonar.projectName", "sopra_group-XX-service"
-//        property "sonar.projectKey", "sopra_group-XX-service"
-//    }
-//}
+test {
+    testLogging.showStandardStreams = true
+    maxParallelForks = 1
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "sopra-fs18-groupXX-service"
+        property "sonar.projectKey", "sopra-fs18-groupXX-service"
+    }
+}
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -58,4 +67,13 @@ defaultTasks 'bootJar', 'build'
 // run all task
 task runAll {
     runAll.dependsOn(bootRun)
+}
+
+jacocoTestReport {
+    group = "Reporting"
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/coverage"
+    }
 }
